@@ -1,0 +1,84 @@
+# config.yaml
+common_params: &common
+  env_id: "simple_spread"           # 环境名称 (影响所有模块)
+  data_type: "expert"               # 数据类型 (expert/medium)
+  dataset_num: 0                    # 数据集种子编号 (0-4)
+  seed: 42                          # 全局随机种子
+  device: "cuda:4"                  # 默认计算设备
+  use_gpu: True                     # 是否使用GPU
+  dataset_dir: "/data/qiaodan/code/diffmarl/datasets"  # 基础数据集路径
+  discrete_action: False            # 是否为离散动作空间
+  mixed_data: False                 # 是否使用自定义混合数据集
+
+behavior_params:  # Behavior Model 预训练参数
+  actor_blocks: 2                   # ScoreNet的残差块数量 (必须与预训练一致)
+  t_GassProj_dims: 32               # 高斯投影维度 (影响时序处理)
+  t_embed_dims: 64                  # 时间嵌入维度
+  sa_embed_dims: 32                 # 状态动作联合嵌入维度
+  resnet_hidden_dim: 512            # Score_IDQL 的 resnet emb dim
+  learning_rates: 3e-4              # Behavior模型学习率
+  lr_anneal: True                   # 是否进行学习率退火
+
+  seq_agent_id: 2                   # 指定训练特定agent的ID，专属Seq模式
+  srpo_mode: "Seq"                  # 训练模式 (Seq/IND/JAL)
+
+critic_params:  # Critic 预训练参数 (必须与预训练配置严格一致)
+  q_layer: 2                        # Critic 中 TwinQ 网络层数 (影响Q网络结构)
+  iql_critic_lr: 3e-4               # Critic专用学习率
+  # critic_hidden_dim: 64             # 与主训练中的hidden_dim对齐   这一项critic中并没有
+  training_epoch: 200               # 预训练epoch数
+  srpo_mode: "JAL"                  # JAL/Ind 
+  eval_interval: 5                  # 5 epochs 评估一次
+  save_interval: 20                 # 20 epochs 存储一次 ckpts
+# Twin Q 默认 [state_dim + action_dim] +[256]*layers +[1]；Value Function moren  [s_dim, 256, 256, 1]
+
+training_main:  # 主训练参数
+  num_steps: 1000000                # 总训练步数
+  batch_size: 512                   # 训练批次大小
+  gamma: 0.99                       # 折扣因子，预训练critic用的都是0.99
+  tau: 0.005                         # 目标网络软更新系数
+  beta: 0.01                        # 正则化系数 (自动设置时会覆盖)
+  difftype: 'SRPO'                  # DQL 选择 MA Diffusion QL，SRPO 选择 MASRPO
+  marltype: 'SEQ'                   # 选择 JAL/IND/CTDE和SEQ，加载不同 MASRPO
+  T: 5                              # 扩散去噪步数，只用于 Diffusion QL，不用于 SRPO
+  beta_schedule: 'vp'               # 噪音调度方式，只用于 Diffusion QL，不用于 SRPO
+  learning_rate: 3e-4               # Diffusion Model Score_IDQL 的学习率，但是似乎score并不需要学习更新，这是之前MADiffusion需要的？
+  dilac_lr: 3e-4                    # Dilac策略学习率
+  n_policy_epochs: 100              # 用于影响 SRPO 中 annealing T_max=args.n_policy_epochs * 10000；总数与num_steps一致
+  regq: 0                           # 如果是true，在SRPO中guidance会进行norm归一化，目前实验都设置为0
+  WT: 'VDS'                         # 影响 SRPO 中 episilon 计算方式，默认VDS wt=std**2
+  diff_epoch:  149
+  critic_epoch: 79                  # 加载的ckpt
+  episode_length: 25                # MPE 25 mujoco 1000，用于eval episode的终止，以及MPE计算average reward
+  logging_interval: 500             # 用于记录logger，mujoco是5000
+  eval_episodes: 10                 # eval时候连续跑多少个episode
+  eval_interval: 10000              # mamujoco 5000
+  lr: 0.005                         # 似乎是DDPG的lr，用于init from env，但是DDPG并不更新，无效参数
+
+network_arch:  # 网络架构参数 (必须与预训练严格一致)
+  hidden_dim: 64                    # DDPG 猎物的网络参数，固定不变
+  policy_layer: 2                   # Dilac策略网络层数 (maze环境自动设为4，其他为2)，网络尺度为 [s_dim, 256*layer, a_dim]
+  t_embed_dims: 64                  # 必须与behavior_params.t_embed_dims一致
+  sa_embed_dims: 32                 # 必须与behavior_params.sa_embed_dims一致
+
+paths:  # 路径配置
+  save_diff_dir: "./SRPO_premodels"  # 扩散模型保存路径,critic是手动置顶的，有空统一一下
+  critic_save_path: "/data/qiaodan/code/diffmarl/SRPO_premodels/" # 预训练模型根路径
+  dir: "/data/qiaodan/code/diffmarl/results"  # 训练结果目录
+  critic_load_path: "/data/qiaodan/code/diffmarl/SRPO_premodels/{env_id}_{data_type}_seed{dataset_num}"  # Critic加载模板路径
+  diffusion_load_path: "/data/qiaodan/code/diffmarl/SRPO_premodels/{env_id}_{data_type}_seed{dataset_num}"  # Diffusion加载模板路径
+
+env_specific:  # 环境相关自动配置
+  episode_length:                    # 根据环境自动设置
+    MPE: 25
+    MaMujoco: 1000
+  buffer_length: 1000000             # 经验回放缓冲区大小
+  temperature_coefficients:          # 正则化系数默认值
+    simple_spread: 0.08
+    HalfCheetah-v2: 0.02
+    bandit: 0.02
+
+optimization:  # 优化参数
+  steps_per_update: 100              # 策略更新间隔步数，似乎没用
+  grad_clip: null                    # 梯度裁剪阈值（只在pretrain critic中试验过）
+  rew_scale: 1.0                     # 奖励缩放系数
