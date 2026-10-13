@@ -1,0 +1,307 @@
+{
+  "repository": "ZhengYinan-AIR/OMIGA",
+  "commit": "39851c0417345543ece6fc704748a3f6850fd305",
+  "enumeration": [
+    {
+      "path": "envs/ma_mujoco",
+      "url": "https://github.com/ZhengYinan-AIR/OMIGA/tree/39851c0417345543ece6fc704748a3f6850fd305/envs/ma_mujoco",
+      "commit": "39851c0417345543ece6fc704748a3f6850fd305",
+      "html_sha256": "430c19bcd53f89b1d23db0aac58688c338c1050451ece684d7de054144172f8c",
+      "items": [
+        {
+          "name": "multiagent_mujoco",
+          "path": "envs/ma_mujoco/multiagent_mujoco",
+          "contentType": "directory"
+        },
+        {
+          "name": "__init__.py",
+          "path": "envs/ma_mujoco/__init__.py",
+          "contentType": "file"
+        }
+      ]
+    },
+    {
+      "path": "envs/ma_mujoco/multiagent_mujoco",
+      "url": "https://github.com/ZhengYinan-AIR/OMIGA/tree/39851c0417345543ece6fc704748a3f6850fd305/envs/ma_mujoco/multiagent_mujoco",
+      "commit": "39851c0417345543ece6fc704748a3f6850fd305",
+      "html_sha256": "7eb766242478647fb3effd7c3ee4eeb277bc966144796a12e71ce72bbb273015",
+      "items": [
+        {
+          "name": "assets",
+          "path": "envs/ma_mujoco/multiagent_mujoco/assets",
+          "contentType": "directory"
+        },
+        {
+          "name": "__init__.py",
+          "path": "envs/ma_mujoco/multiagent_mujoco/__init__.py",
+          "contentType": "file"
+        },
+        {
+          "name": "coupled_half_cheetah.py",
+          "path": "envs/ma_mujoco/multiagent_mujoco/coupled_half_cheetah.py",
+          "contentType": "file"
+        },
+        {
+          "name": "manyagent_ant.py",
+          "path": "envs/ma_mujoco/multiagent_mujoco/manyagent_ant.py",
+          "contentType": "file"
+        },
+        {
+          "name": "manyagent_swimmer.py",
+          "path": "envs/ma_mujoco/multiagent_mujoco/manyagent_swimmer.py",
+          "contentType": "file"
+        },
+        {
+          "name": "mujoco_multi.py",
+          "path": "envs/ma_mujoco/multiagent_mujoco/mujoco_multi.py",
+          "contentType": "file"
+        },
+        {
+          "name": "multiagentenv.py",
+          "path": "envs/ma_mujoco/multiagent_mujoco/multiagentenv.py",
+          "contentType": "file"
+        },
+        {
+          "name": "obsk.py",
+          "path": "envs/ma_mujoco/multiagent_mujoco/obsk.py",
+          "contentType": "file"
+        }
+      ]
+    },
+    {
+      "path": "envs/ma_mujoco/multiagent_mujoco/assets",
+      "url": "https://github.com/ZhengYinan-AIR/OMIGA/tree/39851c0417345543ece6fc704748a3f6850fd305/envs/ma_mujoco/multiagent_mujoco/assets",
+      "commit": "39851c0417345543ece6fc704748a3f6850fd305",
+      "html_sha256": "1090e5f93787885a36459b6a8b3caf88bcc36fd5ebb07dc3035a907a67eaf5f4",
+      "items": [
+        {
+          "name": ".gitignore",
+          "path": "envs/ma_mujoco/multiagent_mujoco/assets/.gitignore",
+          "contentType": "file"
+        },
+        {
+          "name": "__init__.py",
+          "path": "envs/ma_mujoco/multiagent_mujoco/assets/__init__.py",
+          "contentType": "file"
+        },
+        {
+          "name": "coupled_half_cheetah.xml",
+          "path": "envs/ma_mujoco/multiagent_mujoco/assets/coupled_half_cheetah.xml",
+          "contentType": "file"
+        },
+        {
+          "name": "manyagent_ant.xml",
+          "path": "envs/ma_mujoco/multiagent_mujoco/assets/manyagent_ant.xml",
+          "contentType": "file"
+        },
+        {
+          "name": "manyagent_ant.xml.template",
+          "path": "envs/ma_mujoco/multiagent_mujoco/assets/manyagent_ant.xml.template",
+          "contentType": "file"
+        },
+        {
+          "name": "manyagent_ant__stage1.xml",
+          "path": "envs/ma_mujoco/multiagent_mujoco/assets/manyagent_ant__stage1.xml",
+          "contentType": "file"
+        },
+        {
+          "name": "manyagent_swimmer.xml.template",
+          "path": "envs/ma_mujoco/multiagent_mujoco/assets/manyagent_swimmer.xml.template",
+          "contentType": "file"
+        },
+        {
+          "name": "manyagent_swimmer__bckp2.xml",
+          "path": "envs/ma_mujoco/multiagent_mujoco/assets/manyagent_swimmer__bckp2.xml",
+          "contentType": "file"
+        },
+        {
+          "name": "manyagent_swimmer_bckp.xml",
+          "path": "envs/ma_mujoco/multiagent_mujoco/assets/manyagent_swimmer_bckp.xml",
+          "contentType": "file"
+        }
+      ]
+    }
+  ],
+  "files": [
+    {
+      "path": "envs/ma_mujoco/__init__.py",
+      "url": "https://raw.githubusercontent.com/ZhengYinan-AIR/OMIGA/39851c0417345543ece6fc704748a3f6850fd305/envs/ma_mujoco/__init__.py",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "envs/ma_mujoco/multiagent_mujoco/__init__.py",
+      "url": "https://raw.githubusercontent.com/ZhengYinan-AIR/OMIGA/39851c0417345543ece6fc704748a3f6850fd305/envs/ma_mujoco/multiagent_mujoco/__init__.py",
+      "bytes": 185,
+      "sha256": "555e1e0bba0c583ebcebda2947ade9f0b0029247c1db55091f5b2bdf8c637f1c"
+    },
+    {
+      "path": "envs/ma_mujoco/multiagent_mujoco/coupled_half_cheetah.py",
+      "url": "https://raw.githubusercontent.com/ZhengYinan-AIR/OMIGA/39851c0417345543ece6fc704748a3f6850fd305/envs/ma_mujoco/multiagent_mujoco/coupled_half_cheetah.py",
+      "bytes": 1834,
+      "sha256": "5b7e2e3eaf0d2fc8afb20f51965b4864dd8a4abdd228c48310bd4d4c00664a28"
+    },
+    {
+      "path": "envs/ma_mujoco/multiagent_mujoco/manyagent_ant.py",
+      "url": "https://raw.githubusercontent.com/ZhengYinan-AIR/OMIGA/39851c0417345543ece6fc704748a3f6850fd305/envs/ma_mujoco/multiagent_mujoco/manyagent_ant.py",
+      "bytes": 5791,
+      "sha256": "5b88ddb8ce8cdd536a0214b0f930370e949c16f0f333ea9807ecd91646a7def8"
+    },
+    {
+      "path": "envs/ma_mujoco/multiagent_mujoco/manyagent_swimmer.py",
+      "url": "https://raw.githubusercontent.com/ZhengYinan-AIR/OMIGA/39851c0417345543ece6fc704748a3f6850fd305/envs/ma_mujoco/multiagent_mujoco/manyagent_swimmer.py",
+      "bytes": 3735,
+      "sha256": "c3e52d46867b4bed3063e0b572ba15060d105456a53c7d75d13edff45b835781"
+    },
+    {
+      "path": "envs/ma_mujoco/multiagent_mujoco/mujoco_multi.py",
+      "url": "https://raw.githubusercontent.com/ZhengYinan-AIR/OMIGA/39851c0417345543ece6fc704748a3f6850fd305/envs/ma_mujoco/multiagent_mujoco/mujoco_multi.py",
+      "bytes": 10823,
+      "sha256": "ee27d6ede9cc6e1243151c166353514dd231043091b76c64fb46a19f059c3250"
+    },
+    {
+      "path": "envs/ma_mujoco/multiagent_mujoco/multiagentenv.py",
+      "url": "https://raw.githubusercontent.com/ZhengYinan-AIR/OMIGA/39851c0417345543ece6fc704748a3f6850fd305/envs/ma_mujoco/multiagent_mujoco/multiagentenv.py",
+      "bytes": 2411,
+      "sha256": "1bc2351c991ed544eae2fec1a05eb910356497441c1422e5158ccd718ce6fd1c"
+    },
+    {
+      "path": "envs/ma_mujoco/multiagent_mujoco/obsk.py",
+      "url": "https://raw.githubusercontent.com/ZhengYinan-AIR/OMIGA/39851c0417345543ece6fc704748a3f6850fd305/envs/ma_mujoco/multiagent_mujoco/obsk.py",
+      "bytes": 24148,
+      "sha256": "ae412f152d13be5df4cd0806d0531d2e9c82b2eb8725a2afd2166dc20aa42088"
+    },
+    {
+      "path": "envs/ma_mujoco/multiagent_mujoco/assets/__init__.py",
+      "url": "https://raw.githubusercontent.com/ZhengYinan-AIR/OMIGA/39851c0417345543ece6fc704748a3f6850fd305/envs/ma_mujoco/multiagent_mujoco/assets/__init__.py",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "envs/ma_mujoco/multiagent_mujoco/assets/coupled_half_cheetah.xml",
+      "url": "https://raw.githubusercontent.com/ZhengYinan-AIR/OMIGA/39851c0417345543ece6fc704748a3f6850fd305/envs/ma_mujoco/multiagent_mujoco/assets/coupled_half_cheetah.xml",
+      "bytes": 8773,
+      "sha256": "30b9b268760e3fde107cb5e18816291521ce976c2c9cedc578db636460a1c27b"
+    },
+    {
+      "path": "envs/ma_mujoco/multiagent_mujoco/assets/manyagent_ant.xml",
+      "url": "https://raw.githubusercontent.com/ZhengYinan-AIR/OMIGA/39851c0417345543ece6fc704748a3f6850fd305/envs/ma_mujoco/multiagent_mujoco/assets/manyagent_ant.xml",
+      "bytes": 8333,
+      "sha256": "edf626ff3c85e5ae46b483da84ba1e7172b9bd270ea44296689b8f9e708d5242"
+    },
+    {
+      "path": "envs/ma_mujoco/multiagent_mujoco/assets/manyagent_ant.xml.template",
+      "url": "https://raw.githubusercontent.com/ZhengYinan-AIR/OMIGA/39851c0417345543ece6fc704748a3f6850fd305/envs/ma_mujoco/multiagent_mujoco/assets/manyagent_ant.xml.template",
+      "bytes": 3075,
+      "sha256": "595123ff75186e67def96f22383758afd189dc3e727d3460d6785c779e3c8ffb"
+    },
+    {
+      "path": "envs/ma_mujoco/multiagent_mujoco/assets/manyagent_ant__stage1.xml",
+      "url": "https://raw.githubusercontent.com/ZhengYinan-AIR/OMIGA/39851c0417345543ece6fc704748a3f6850fd305/envs/ma_mujoco/multiagent_mujoco/assets/manyagent_ant__stage1.xml",
+      "bytes": 5215,
+      "sha256": "7d78aea0b39907d1f59841501fad3d45b0c5d10e5f4f6e833b74641e323d7953"
+    },
+    {
+      "path": "envs/ma_mujoco/multiagent_mujoco/assets/manyagent_swimmer.xml.template",
+      "url": "https://raw.githubusercontent.com/ZhengYinan-AIR/OMIGA/39851c0417345543ece6fc704748a3f6850fd305/envs/ma_mujoco/multiagent_mujoco/assets/manyagent_swimmer.xml.template",
+      "bytes": 1896,
+      "sha256": "e258a36037bd7dca12e563ed9c0986a6239b6394ea9ff76edaf49f65ebeb9831"
+    },
+    {
+      "path": "envs/ma_mujoco/multiagent_mujoco/assets/manyagent_swimmer__bckp2.xml",
+      "url": "https://raw.githubusercontent.com/ZhengYinan-AIR/OMIGA/39851c0417345543ece6fc704748a3f6850fd305/envs/ma_mujoco/multiagent_mujoco/assets/manyagent_swimmer__bckp2.xml",
+      "bytes": 2900,
+      "sha256": "ed0ec4247b3705a9f1a631b380e74d192aafc4f4a279ee45cde387cb4a5e33ce"
+    },
+    {
+      "path": "envs/ma_mujoco/multiagent_mujoco/assets/manyagent_swimmer_bckp.xml",
+      "url": "https://raw.githubusercontent.com/ZhengYinan-AIR/OMIGA/39851c0417345543ece6fc704748a3f6850fd305/envs/ma_mujoco/multiagent_mujoco/assets/manyagent_swimmer_bckp.xml",
+      "bytes": 2570,
+      "sha256": "2b2ded530dbc77c7b74b724c5a4a384438287d72b94952caeb61807d7e3a9fd4"
+    }
+  ],
+  "excluded": [
+    "envs/ma_mujoco/multiagent_mujoco/assets/.gitignore"
+  ],
+  "metadata_files": [
+    {
+      "path": "upstream-metadata/requirements.txt",
+      "url": "https://raw.githubusercontent.com/ZhengYinan-AIR/OMIGA/39851c0417345543ece6fc704748a3f6850fd305/requirements.txt",
+      "bytes": 87,
+      "sha256": "873e17fa4b32dafd359d6a5c5dc441e180ffed45b20ea115767e4ea7fe47de24"
+    },
+    {
+      "path": "upstream-metadata/README.md",
+      "url": "https://raw.githubusercontent.com/ZhengYinan-AIR/OMIGA/39851c0417345543ece6fc704748a3f6850fd305/README.md",
+      "bytes": 2299,
+      "sha256": "2060d7541b9fe8a11689339010ebdad6ba0077c9a64b1e03f18fd66d5d1cda25"
+    }
+  ],
+  "upstream_root_items": [
+    {
+      "name": "algos",
+      "path": "algos",
+      "contentType": "directory"
+    },
+    {
+      "name": "configs",
+      "path": "configs",
+      "contentType": "directory"
+    },
+    {
+      "name": "datasets",
+      "path": "datasets",
+      "contentType": "directory"
+    },
+    {
+      "name": "envs",
+      "path": "envs",
+      "contentType": "directory"
+    },
+    {
+      "name": "networks",
+      "path": "networks",
+      "contentType": "directory"
+    },
+    {
+      "name": "utils",
+      "path": "utils",
+      "contentType": "directory"
+    },
+    {
+      "name": ".gitignore",
+      "path": ".gitignore",
+      "contentType": "file"
+    },
+    {
+      "name": "README.md",
+      "path": "README.md",
+      "contentType": "file"
+    },
+    {
+      "name": "requirements.txt",
+      "path": "requirements.txt",
+      "contentType": "file"
+    },
+    {
+      "name": "run_mujoco.py",
+      "path": "run_mujoco.py",
+      "contentType": "file"
+    }
+  ],
+  "license_checks": [
+    {
+      "path": "LICENSE",
+      "http_status": 404
+    },
+    {
+      "path": "LICENSE.md",
+      "http_status": 404
+    },
+    {
+      "path": "LICENSE.txt",
+      "http_status": 404
+    }
+  ],
+  "license_observation": "No standalone license file exists in the enumerated OMIGA root or envs/ma_mujoco subtree at this commit; do not infer a new license grant from this provenance record."
+}

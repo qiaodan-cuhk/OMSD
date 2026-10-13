@@ -1,0 +1,9 @@
+# OMIGA snapshot HDF5. Each agent's widths are validated from the data.
+profile: omiga
+env_id: HalfCheetah-v2
+agent_conf: 6x1
+agent_obsk: 1
+data_path: datasets/omiga/HalfCheetah-v2-6x1-expert.hdf5
+algorithm: OMSD
+device: 'cuda:0'
+output_root: outputs

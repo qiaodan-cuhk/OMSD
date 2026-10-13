@@ -1,0 +1,8 @@
+# Explicit three-agent example. Override data_path to your existing dataset.
+profile: mpe
+env_id: simple_spread
+algorithm: OMSD
+conditional_order: 0-2-1
+seed: 42
+device: cuda:0
+output_root: outputs
