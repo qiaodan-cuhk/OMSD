@@ -1,0 +1,11 @@
+# OG-MARL packed episodes; use the matching MuJoCo 2.1 env during evaluation.
+profile: mamujoco210
+env_id: 2ant
+agent_conf: 2x4
+agent_obsk: 1
+data_path: datasets/ogmarl/2ant/expert
+algorithm: OMSD
+# Prefix is auto-removed only when verified as the agent-ID one-hot vector.
+# observation_prefix: 0  # Explicitly retain observations with no ID prefix.
+device: 'cuda:0'
+output_root: outputs

@@ -1,0 +1,9 @@
+# OMAR-style MPE transition export; dimensions are read from data.
+profile: mpe
+env_id: simple_spread
+data_path: datasets/simple_spread/expert/seed_0_data
+algorithm: OMSD
+device: 'cuda:0'
+terminal_policy: fixed_horizon
+episode_length: 25
+output_root: outputs

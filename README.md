@@ -1,66 +1,145 @@
-# OMSD: Offline MARL with Sequential Score Decomposition
+# OMSD: Offline Multi-agent Reinforcement Learning via Sequential Score Decomposition
 
-This is the official implementation for the paper **"Offline MARL with Sequential Score Decomposition"**.
+Official implementation of [the paper](https://arxiv.org/abs/2505.05968).
 
----
+## Requirements and installation
 
-## 📢 Requirements & Installation
-
-### 1. Environment Setup
-- **Python**: 3.9
-- **PyTorch**: `> 1.4` (Recommended: `pytorch==1.10.1 torchvision==0.11.2 torchaudio==0.10.1 cudatoolkit=11.3`)
-- **Gym**: `==0.10.8`
-
-### 2. MuJoCo Installation
-The datasets are sampled from **MuJoCo 2.0**. Please note that using MuJoCo >= 2.1 may cause performance drops due to environment discrepancies.
-
-We provide MuJoCo 2.00 files in `diffmarl/downloads/mujoco200` and the corresponding license `mjkey.txt`. Alternatively, you can download them via:
-```bash
-wget [https://www.roboti.us/download/mujoco200_linux.zip](https://www.roboti.us/download/mujoco200_linux.zip)
-unzip mujoco200_linux.zip
-```
-Move files to your root directory and set the environment variables in your ~/.bashrc:
+Use Linux and Python 3.9. The recommended GPU environment is PyTorch 1.10.1
+with CUDA 11.3:
 
 ```bash
-export LD_LIBRARY_PATH=~/.mujoco/mujoco200/bin${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
-export MUJOCO_KEY_PATH=~/.mujoco${MUJOCO_KEY_PATH}
+conda create -n omsd python=3.9 -y
+conda activate omsd
+conda install pytorch==1.10.1 torchvision==0.11.2 torchaudio==0.10.1 cudatoolkit=11.3 -c pytorch -c conda-forge
+python -m pip install -r requirements.txt
 ```
 
-### 3. Multi-agent Environments
-Install Multi-agent Particle Environments (MPE):
+For newer GPUs, install a compatible CUDA-enabled PyTorch build before the
+requirements. The requirements support PyTorch 1.10.1 and later 1.x/2.x versions.
+Training defaults to GPU 0; select another GPU with `--device 1` or `--device-id 1`.
+
+MPE is included in this repository and needs no separate installation. Gym
+0.12.1 is used with the MADiff/OG-MARL multi-agent MuJoCo wrapper.
+
+For MuJoCo evaluation, install the MuJoCo 2.1 engine under
+`~/.mujoco/mujoco210` following the
+[mujoco-py guide](https://github.com/openai/mujoco-py#install-mujoco), then run:
 
 ```bash
-cd diffmarl/envs/multiagent-particle-envs
-pip install -e .
+export LD_LIBRARY_PATH="$HOME/.mujoco/mujoco210/bin${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
 ```
 
-For Multi-agent MuJoCo, please refer to the multiagent_mujoco directory provided in this repository.
+Use the simulator version matching the dataset. The `omiga` branch has separate
+[OMIGA installation instructions](https://github.com/qiaodan-cuhk/OMSD/blob/omiga/docs/omiga.md).
 
-## 📦 Datasets
+## Algorithms
 
-The offline datasets for different tasks can be downloaded from the open-sourced links. Please see details in paper/Appendix:
-Please decompress the downloaded datasets into the datasets/ folder.
+Select the same `--algorithm` in all three stages; `OMSD` is the default.
 
-## 🚀 Usage
+| Algorithm | Behavior model | IQL critic |
+| --- | --- | --- |
+| `OMSD` | Sequential conditional diffusion | Joint-action centralized |
+| `CTDE` | Independent diffusion | Joint-action centralized |
+| `IND` | Independent diffusion | Per-agent independent |
 
-To train the independent DiffusionMARL baseline, run:
+Behavior models condition on local observations; OMSD also uses preceding
+agents' actions. Execution policies use only their own observations.
+
+## Datasets
+
+Download datasets following the [OMAR](https://github.com/ling-pan/OMAR) and
+[MADiff](https://github.com/zbzhu99/madiff) instructions.
+
+- **MPE:** `simple_spread`, `simple_tag`, and `simple_world`, using per-agent NumPy exports.
+- **Multi-agent MuJoCo 2.1:** `2halfcheetah`, `2ant`, and `4ant`, using MADiff/OG-MARL episode exports.
+
+For MPE, choose one available dataset seed for an experiment, randomly if
+desired, such as `seed_0_data`. Use that same directory for all behavior agents,
+IQL and policy training. `--dataset-num` selects the data-generation seed folder
+in the default layout; `--seed` controls training randomness.
+
+## Training
+
+The three stages have independent entry points: `pretrain_behavior.py`,
+`pretrain_critic.py`, and `main.py`. Behavior and IQL pretraining can run in
+parallel; policy training uses the selected pretrained checkpoints.
+
+The Bash examples share settings within each environment and start one stage
+per command. For MPE `simple_spread`, expert:
 
 ```bash
-python main.py --env_id <ENVIRONMENT_NAME> --data_type <DATA_TYPE> --dataset_num <DATASET_NUM>
+export OMSD_DATA_PATH=/path/to/simple_spread/expert/seed_0_data
+export OMSD_DATASET_NUM=0
+bash bash/mpe/pretrain_diffusion.sh
+bash bash/mpe/pretrain_iql.sh
+bash bash/mpe/train.sh
 ```
-Parameters:
---env_id: simple_spread / simple_tag / simple_world / HalfCheetah-v2
 
---data_type: random / medium-replay / medium / expert
-
---dataset_num: 0 / 1 / 2 / 3 / 4
-
-Example:
+For MADiff/OG-MARL `2halfcheetah`, good:
 
 ```bash
-python main.py --env_id HalfCheetah-v2 --data_type expert --dataset_num 0 --device 0 --seed 1
+export OMSD_DATA_PATH=/path/to/2halfcheetah/good
+bash bash/mamujoco/pretrain_diffusion.sh
+bash bash/mamujoco/pretrain_iql.sh
+bash bash/mamujoco/train.sh
 ```
 
-## 📚 Acknowledgement
+Edit `bash/mpe/settings.sh` or `bash/mamujoco/settings.sh`, or use environment
+overrides such as `OMSD_ALGORITHM=CTDE`, `OMSD_DEVICE=1`, and `OMSD_SEED=42`.
+Diffusion can also be pretrained by agent:
 
-Our codebase is built upon the open-source frameworks Diffusion-QL and OMAR. We thank the authors for their wonderful work.
+```bash
+OMSD_PRETRAIN_AGENT_ID=1 OMSD_DEVICE=1 bash bash/mpe/pretrain_diffusion.sh
+```
+
+Each agent job retains the full sequential conditioning data and writes its
+own checkpoint. Supply all agent files in dataset-agent order when training
+policy. OMSD/CTDE use one joint IQL critic; IND critics can also be trained
+independently by agent. See [Bash examples](bash/README.md) for parallel jobs and
+checkpoint lists.
+
+## Outputs and checkpoint selection
+
+Stages save checkpoints, configuration and metrics under the experiment output
+directory. Set `OMSD_OUTPUT_DIR` in Bash or `--output-dir` in Python to choose it.
+Use a new directory for a repeated run.
+
+Policy training accepts explicit `--behavior-checkpoint` and
+`--critic-checkpoint` paths. Try intermediate pretraining checkpoints when
+tuning performance; the final checkpoint is not always the best choice.
+See [training notes](docs/reproduction.md) for checkpoint selection and parameters.
+
+To evaluate during policy training, set `OMSD_EVAL_INTERVAL=10000` in Bash or
+pass `--eval-interval 10000` to `main.py`. Tag/world evaluation also requires
+`--opponent-checkpoint` for the prey policy.
+
+## OMIGA and ablations
+
+[`main`](https://github.com/qiaodan-cuhk/OMSD/tree/main) provides the MPE and
+MADiff/OG-MARL workflow. The
+[`omiga` branch](https://github.com/qiaodan-cuhk/OMSD/tree/omiga) adds OMIGA datasets
+and environments, GMM behavior models, and fixed-order ablations using the same
+training core.
+
+## Acknowledgements
+
+We thank [OMAR](https://github.com/ling-pan/OMAR),
+[MADiff](https://github.com/zbzhu99/madiff),
+[Diffusion-QL](https://github.com/Zhendong-Wang/Diffusion-Policies-for-Offline-RL),
+and the multi-agent environment projects for their open-source implementations.
+
+## Citation
+
+If you find this code or our work useful in your research, please cite:
+
+```bibtex
+@misc{qiao2026offlinemultiagentreinforcementlearning,
+      title={Offline Multi-agent Reinforcement Learning via Sequential Score Decomposition},
+      author={Dan Qiao and Wenhao Li and Shanchao Yang and Hongyuan Zha and Baoxiang Wang},
+      year={2026},
+      eprint={2505.05968},
+      archivePrefix={arXiv},
+      primaryClass={cs.LG},
+      url={https://arxiv.org/abs/2505.05968},
+}
+```

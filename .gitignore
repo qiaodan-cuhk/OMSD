@@ -1,0 +1,30 @@
+# Python / local development
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+.coverage
+htmlcov/
+*.egg-info/
+build/
+dist/
+
+# User supplied data and model artifacts
+datasets/
+checkpoints/
+pretrain/
+SRPO_premodels/
+outputs/
+results/
+runs/
+*.pt
+*.pth
+*.h5
+*.hdf5
+*.npz
+
+# Local environment configuration
+.env
+.env.*
+!.env.example
